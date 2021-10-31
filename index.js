@@ -104,31 +104,24 @@ console.log(bufferObj)
 var startOffset = 0;
 
 const play = () => {
-	console.log(bufferObj);
-	var startTime = context.currentTime + 0.100;
-	var tempo = 80; // BPM (beats per minute)
-	var eighthNoteTime = (60 / tempo) / 2;
+  if (context.state==='suspended')  context.resume();
 
-	for (var bar = 0; bar < 2; bar++) {
-		var time = startTime + bar * 8 * eighthNoteTime;
-		// Play the bass (kick) drum on beats 1, 5
-		playSound(bufferObj.kick, time);
-		playSound(bufferObj.kick, time + 4 * eighthNoteTime);
-		// Play the snare drum on beats 3, 7
-		playSound(bufferObj.snare, time + 2 * eighthNoteTime);
-		playSound(bufferObj.snare, time + 6 * eighthNoteTime);
-		// Play the hihat every eighth note.
-		for (var i = 0; i < 8; ++i) {
-			playSound(bufferObj.hihat, time + i * eighthNoteTime);
-		}
-	}
-}
+  const osc = context.createOscillator();
+  osc.type= 'triangle';
+  osc.frequency.value = 350; 
 
-const drumRoll = ()=>{
-	let count = 0;
-	var startTime = context.currentTime + 0.100;
-	while(count<10){
-		playSound(bufferObj.snare, startTime+ count*0.08);
-		count++;
-	}
+  //increase the freq
+  osc.frequency.exponentialRampToValueAtTime(600,context.currentTime + 1);
+Node
+  //drop the volume
+  const gainNode = context.createGain();
+  gainNode.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 1);
+
+
+  osc.start(0);
+
+  //stop after 1 second 
+  osc.stop(context.currentTime + 1);
+
+  osc.connect(gainNode).connect(context.destination);
 }
