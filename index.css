@@ -1,0 +1,210 @@
+body {
+  background-image: linear-gradient(to right, #29648a, #25274d);
+}
+.heading {
+  font-family: "VT323", monospace;
+  height: 20vh;
+  color: white;
+  text-align: center;
+  font-size: 72px;
+  letter-spacing: 10px;
+  /* #0a4870,#1c1f57 */
+}
+/*.heading::after{
+                content:"Good People";
+                animation: spin 3s linear;
+            }
+            @keyframes spin{
+                0%{content: ""}
+                100%{content:"Good People" ;}
+            }*/
+.bd {
+  border-radius: 5%;
+}
+.pads {
+  height: 80vh;
+  display: grid;
+  grid-template-rows: 30vh 30vh 30vh;
+  grid-template-columns: 1fr 25vh 25vh 25vh 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+  grid-template-areas:
+    ". p1 p2 p3 ."
+    ". p4 p5 p6 ."
+    ". p7 p8 p9 .";
+}
+.padArea1{
+  grid-area: p1;
+}
+.pad1 {
+  background-image: radial-gradient(
+    circle closest-side,
+    rgb(253, 168, 196),
+    #ff4081
+  );
+  height: 85%;
+  /*background:#FF4081;*/
+}
+.padArea2{
+  grid-area: p2;
+}
+.pad2 {
+  background-image: radial-gradient(
+    circle closest-side,
+    rgb(101, 70, 139),
+    #4a148c
+  );
+
+  height: 85%;
+}
+.padArea3{
+  grid-area: p3;
+}
+.pad3 {
+  background-image: radial-gradient(
+    circle closest-side,
+    rgb(247, 133, 133),
+    #ff5252
+  );
+  height: 85%;
+}
+.padArea4{
+  grid-area: p4;
+}
+.pad4 {
+  background-image: radial-gradient(circle closest-side, #ada2a2, #009688);
+
+  height: 85%;
+}
+.padArea5{
+  grid-area: p5;
+}
+.pad5 {
+  background-image: radial-gradient(
+    circle closest-side,
+    rgb(197, 92, 139),
+    #c51162
+  );
+  height: 85%;
+}
+.padArea6{
+  grid-area: p6;
+}
+.pad6 {
+  background-image: radial-gradient(circle closest-side, #aed5f5, #64b5f6);
+
+  grid-area: p6;
+  height: 85%;
+}
+.padArea7{
+  grid-area: p7;
+}
+.pad7 {
+  background-image: radial-gradient(
+    circle closest-side,
+    rgb(144, 173, 145),
+    #4caf50
+  );
+  height: 85%;
+}
+.padArea8{
+  grid-area: p8;
+}
+.pad8 {
+  background-image: radial-gradient(
+    circle closest-side,
+    rgb(199, 203, 228),
+    #9fa8da
+  );
+
+  height: 85%;
+}
+.padArea9{
+  grid-area: p9;
+}
+.pad9 {
+  background-image: radial-gradient(
+    circle closest-side,
+    rgb(255, 244, 144),
+    #ffeb3b
+  );
+
+  grid-area: p9;
+  height: 85%;
+}
+.pads div.bd:hover {
+  background-image: radial-gradient(circle closest-side, white, wheat);
+  cursor: pointer;
+}
+.pads div.bd:active {
+  transform: scale(0.95);
+  transition: all 0.2s;
+}
+.machine_heading {
+  font-family: "VT323", monospace;
+  height: 20vh;
+  color: white;
+  text-align: center;
+  font-size: 72px;
+  letter-spacing: 10px;
+}
+.machine {
+  height: 80vh;
+  display: grid;
+  grid-template-rows: 15vh 15vh 15vh;
+  grid-template-columns: 1fr 6vh 6vh 6vh 6vh 6vh 6vh 6vh 6vh 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+  grid-template-areas:
+    ". p11 p12 p13 p14 p15 p16 p17 p18 ."
+    ". p21 p22 p23 p24 p25 p26 p27 p28 ."
+    ". p31 p32 p33 p34 p31 p32 p33 p34 .";
+}
+.p11 {
+  border: 2px solid white;
+  grid-area: p11;
+}
+.p12 {
+  border: 2px solid white;
+  grid-area: p12;
+}
+.p13 {
+  border: 2px solid white;
+  grid-area: p13;
+}
+.p14 {
+  border: 2px solid white;
+  grid-area: p14;
+}
+.p21 {
+  border: 2px solid white;
+  grid-area: p21;
+}
+.p22 {
+  border: 2px solid white;
+  grid-area: p22;
+}
+.p23 {
+  border: 2px solid white;
+  grid-area: p23;
+}
+.p24 {
+  border: 2px solid white;
+  grid-area: p24;
+}
+.p31 {
+  border: 2px solid white;
+  grid-area: p31;
+}
+.p32 {
+  border: 2px solid white;
+  grid-area: p32;
+}
+.p33 {
+  border: 2px solid white;
+  grid-area: p33;
+}
+.p34 {
+  border: 2px solid white;
+  grid-area: p34;
+}
