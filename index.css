@@ -1,0 +1,148 @@
+html,body {height:100%;margin:0;padding:0;}
+body {background:#7d94fe;}
+section {height:100%;width:100%;position:relative;overflow:hidden;}
+div,li,ul {margin:0;padding:0;}
+.cloud1,.cloud2,.tube,.mountain,.bush,.floor {position:absolute;}
+.cloud1,.cloud2 {height:132px;}
+.cloud1 {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 0;
+	width:174px;
+	top:5%;
+	z-index:6;
+	-webkit-animation:cloud1 60s infinite;
+	-moz-animation:cloud1 60s infinite;
+	-o-animation:cloud1 60s infinite;
+	animation:cloud1 60s infinite;
+}
+.cloud2 {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 -132px;
+	width:268px;
+	top:15%;
+	z-index:7;
+	-webkit-animation:cloud2 60s infinite;
+	-moz-animation:cloud2 60s infinite;
+	-o-animation:cloud2 60s infinite;
+	animation:cloud2 60s infinite;
+}
+ul.group {
+	position:relative;
+	top:55%;
+	overflow:auto;
+	width:485px;
+	height:291px;
+  list-style:none;
+}
+.mario,ul.group {
+	left:0;
+	right:0;
+	margin-right:auto;
+	margin-left:auto;
+}
+ul.group li {
+	float:left;
+	width:97px;
+	height:92px;
+	position:absolute;
+	bottom:40%;
+	left:0;
+	z-index:13;
+}
+ul.group li:nth-child(2) {left:20%;}
+ul.group li:nth-child(3) {left:40%;}
+ul.group li:nth-child(4) {left:40%;}
+ul.group li:nth-child(5) {left:60%;}
+ul.group li:nth-child(6) {left:80%;}
+ul.group li.block {background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 -266px;}
+ul.group li.box {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 -450px;
+	-webkit-animation:box 800ms infinite;
+	-moz-animation:box 800ms infinite;
+	-o-animation:box 800ms infinite;
+	animation:box 800ms infinite;
+	z-index:14;
+}
+ul.group li.coin {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 -358px;
+	z-index:12;
+}
+.coinAnim {
+	-webkit-animation:coin 800ms ;
+	-moz-animation:coin 800ms ;
+	-o-animation:coin 800ms ;
+	animation:coin 800ms ;
+}
+ul.group li.mario {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 -963px;
+	width:94px;
+	height:94px;
+	bottom:0;
+	z-index:15;
+}
+ul.group li.marioAnim {
+		-webkit-animation:mario 800ms ;
+	-moz-animation:mario 800ms ;
+	-o-animation:mario 800ms ;
+	animation:mario 800ms ;
+	z-index:15;
+}
+/**/
+.tube,.mountain,.bush{bottom:5%;}
+.tube {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 -541px;
+	right:5%;
+	width:178px;
+	height:178px;
+	z-index:10;
+}
+.mountain {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 -719px;
+	height:100px;
+	width:264px;
+	left:10%;
+	z-index:8;
+}
+.bush {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')no-repeat 0 -819px;
+	width:176px;
+	height:88px;
+	right:25%;
+	z-index:9;
+}
+.floor {
+	background:url('http://fotos.subefotos.com/0b84cd405ce010e3e156188bfc49ce8ao.png')repeat-x 0 -907px;
+	bottom:0;
+	height:56px;
+	width:100%;
+	z-index:11;
+}
+/*animation coin*/
+@-webkit-keyframes coin {0% {bottom:40%;}50% {bottom:75%;}100% {bottom:40%;}}
+@moz-keyframes coin {0% {bottom:40%;}50% {bottom:70%;}100% {bottom:40%;}}
+@o-keyframes coin {0% {bottom:40%;}50% {bottom:70%;}100% {bottom:40%;}}
+@keyframes coin {0% {bottom:40%;}50% {bottom:70%;}100% {bottom:40%;}}
+/*animation mario*/
+@-webkit-keyframes mario {0% {bottom:0%;}50% {bottom:10%;}100% {bottom:0%;}}
+@moz-keyframes mario {0% {bottom:0%;}50% {bottom:10%;}100% {bottom:0%;}}
+@o-keyframes mario {0% {bottom:0%;}50% {bottom:10%;}100% {bottom:0%;}}
+@keyframes mario {0% {bottom:0%;}50% {bottom:10%;}100% {bottom:0%;}}
+/*animation box*/
+@-webkit-keyframes box {0% {bottom:40%;}50% {bottom:42%;}100% {bottom:40%;}}
+@moz-keyframes box {0% {bottom:40%;}50% {bottom:42%;}100% {bottom:40%;}}
+@o-keyframes box {0% {bottom:40%;}50% {bottom:42%;}100% {bottom:40%;}}
+@keyframes box {0% {bottom:40%;}50% {bottom:42%;}100% {bottom:40%;}}
+/*animation cloud*/
+@-webkit-keyframes cloud1 {0% {left:-50%;}20% {left:-10%;}100% {left:100%;}}
+@moz-keyframes cloud1 {0% {left:-50%;}20% {left:-10%;}100% {left:100%;}}
+@o-keyframes cloud1 {0% {left:-50%;}20% {left:-10%;}100% {left:100%;}}
+@keyframes cloud1 {0% {left:-50%;}20% {left:-10%;}100% {left:100%;}}
+@-webkit-keyframes cloud2 {0% {left:-10%;}100% {left:100%;}}
+@moz-keyframes cloud2 {0% {left:-10%;}100% {left:100%;}}
+@o-keyframes cloud2 {0% {left:-10%;}100% {left:100%;}}
+@keyframes cloud2 {0% {left:-10%;}100% {left:100%;}}
+/*mediaqueris*/
+@media (max-height: 700px) {
+  ul.group {top:10%;}
+}
+@media (max-width: 700px) {
+  ul.group {top:10%;}
+}

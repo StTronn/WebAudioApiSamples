@@ -106,22 +106,52 @@ var startOffset = 0;
 const play = () => {
   if (context.state==='suspended')  context.resume();
 
+  //create an oscillator
   const osc = context.createOscillator();
+
+  //set the type & frequency of the oscillator
   osc.type= 'triangle';
   osc.frequency.value = 350; 
 
-  //increase the freq
+  //increase the freq exponentially over time
   osc.frequency.exponentialRampToValueAtTime(600,context.currentTime + 1);
-Node
-  //drop the volume
+
+  //drop the volume exponentially over time
   const gainNode = context.createGain();
   gainNode.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 1);
 
 
+  //start
   osc.start(0);
 
   //stop after 1 second 
   osc.stop(context.currentTime + 1);
 
+  //connect
   osc.connect(gainNode).connect(context.destination);
 }
+
+//add keyboard listner
+document.addEventListener('keydown', (e) => {
+  //detect up arrow key 
+  if (e.key === 'ArrowUp') {
+    const mario = document.querySelector('.mario');
+    const coin = document.querySelector('.coin');
+
+    mario.classList.remove('marioAnim');
+    coin.classList.remove('coinAnim');
+
+    //add class marioAnim 
+    mario.classList.add('marioAnim');
+    coin.classList.add('coinAnim');
+
+    mario.addEventListener('animationend', () => {
+      mario.classList.remove('marioAnim');
+    });
+    coin.addEventListener('animationend', () => {
+      coin.classList.remove('coinAnim');
+    });
+    play();
+  }
+
+});
