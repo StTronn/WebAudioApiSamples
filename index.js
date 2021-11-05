@@ -1,17 +1,20 @@
 const context = new AudioContext();
 
+const analyser = context.createAnalyser();
+const frequencyData = new Uint8Array(200);
+
 const soundmap = {
-	kick:
-		"https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/boom.wav",
-	hihat:
-		"https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/hihat.wav ",
-	openhat: "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/openhat.wav",
-	snare:
-		"https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/snare.wav",
-	tom:
-		"https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/tom.wav",
-	ride:
-		"https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/ride.wav"
+  kick:
+    "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/boom.wav",
+  hihat:
+    "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/hihat.wav ",
+  openhat: "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/openhat.wav",
+  snare:
+    "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/snare.wav",
+  tom:
+    "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/tom.wav",
+  ride:
+    "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/ride.wav"
 };
 
 
@@ -25,7 +28,7 @@ function loadSounds(obj, soundMap, callback) {
     names.push(name);
     paths.push(path);
   }
-  bufferLoader = new BufferLoader(context, paths, function(bufferList) {
+  bufferLoader = new BufferLoader(context, paths, function (bufferList) {
     for (var i = 0; i < bufferList.length; i++) {
       var buffer = bufferList[i];
       var name = names[i];
@@ -49,7 +52,7 @@ function BufferLoader(context, urlList, callback) {
   this.loadCount = 0;
 }
 
-BufferLoader.prototype.loadBuffer = function(url, index) {
+BufferLoader.prototype.loadBuffer = function (url, index) {
   // Load buffer asynchronously
   var request = new XMLHttpRequest();
   request.open("GET", url, true);
@@ -57,11 +60,11 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
 
   var loader = this;
 
-  request.onload = function() {
+  request.onload = function () {
     // Asynchronously decode the audio file data in request.response
     loader.context.decodeAudioData(
       request.response,
-      function(buffer) {
+      function (buffer) {
         if (!buffer) {
           alert('error decoding file data: ' + url);
           return;
@@ -70,30 +73,30 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
         if (++loader.loadCount == loader.urlList.length)
           loader.onload(loader.bufferList);
       },
-      function(error) {
+      function (error) {
         console.error('decodeAudioData error', error);
       }
     );
   }
 
-  request.onerror = function() {
+  request.onerror = function () {
     alert('BufferLoader: XHR error');
   }
 
   request.send();
 };
 
-BufferLoader.prototype.load = function() {
+BufferLoader.prototype.load = function () {
   for (var i = 0; i < this.urlList.length; ++i)
-  this.loadBuffer(this.urlList[i], i);
+    this.loadBuffer(this.urlList[i], i);
 };
 
 
 function playSound(buffer, time = 0) {
-	var source = context.createBufferSource();
-	source.buffer = buffer;
-	source.connect(context.destination);
-	source[source.start ? 'start' : 'noteOn'](time);
+  var source = context.createBufferSource();
+  source.buffer = buffer;
+  source.connect(context.destination);
+  source[source.start ? 'start' : 'noteOn'](time);
 }
 
 
@@ -104,31 +107,59 @@ console.log(bufferObj)
 var startOffset = 0;
 
 const play = () => {
-	console.log(bufferObj);
-	var startTime = context.currentTime + 0.100;
-	var tempo = 80; // BPM (beats per minute)
-	var eighthNoteTime = (60 / tempo) / 2;
+  var startTime = context.currentTime + 0.100;
+  var tempo = 80; // BPM (beats per minute)
+  var eighthNoteTime = (60 / tempo) / 2;
 
-	for (var bar = 0; bar < 2; bar++) {
-		var time = startTime + bar * 8 * eighthNoteTime;
-		// Play the bass (kick) drum on beats 1, 5
-		playSound(bufferObj.kick, time);
-		playSound(bufferObj.kick, time + 4 * eighthNoteTime);
-		// Play the snare drum on beats 3, 7
-		playSound(bufferObj.snare, time + 2 * eighthNoteTime);
-		playSound(bufferObj.snare, time + 6 * eighthNoteTime);
-		// Play the hihat every eighth note.
-		for (var i = 0; i < 8; ++i) {
-			playSound(bufferObj.hihat, time + i * eighthNoteTime);
-		}
-	}
+  for (var bar = 0; bar < 2; bar++) {
+    var time = startTime + bar * 8 * eighthNoteTime;
+    // Play the bass (kick) drum on beats 1, 5
+    playSound(bufferObj.kick, time);
+    playSound(bufferObj.kick, time + 4 * eighthNoteTime);
+    // Play the snare drum on beats 3, 7
+    playSound(bufferObj.snare, time + 2 * eighthNoteTime);
+    playSound(bufferObj.snare, time + 6 * eighthNoteTime);
+    // Play the hihat every eighth note.
+    for (var i = 0; i < 8; ++i) {
+      playSound(bufferObj.hihat, time + i * eighthNoteTime);
+    }
+  }
 }
 
-const drumRoll = ()=>{
-	let count = 0;
-	var startTime = context.currentTime + 0.100;
-	while(count<10){
-		playSound(bufferObj.snare, startTime+ count*0.08);
-		count++;
-	}
+
+const playSick = () => {
+  AnimateButton();
+
+  var startTime = context.currentTime + 0.100;
+  var tempo = 120; // BPM (beats per minute)
+  var eighthNoteTime = (60 / tempo) / 2;
+
+  for (var bar = 0; bar < 3; bar++) {
+    var time = startTime + bar * 8 * eighthNoteTime;
+
+    // Play the bass (kick) drum on beats 1, 5
+    playSound(bufferObj.kick, time);
+    playSound(bufferObj.kick, time + 3 * eighthNoteTime);
+    playSound(bufferObj.kick, time + 5 * eighthNoteTime);
+    // Play the snare drum on beats 3, 7
+    playSound(bufferObj.snare, time + 2 * eighthNoteTime);
+    playSound(bufferObj.snare, time + 6 * eighthNoteTime);
+  }
 }
+
+
+const drumRoll = () => {
+  let count = 0;
+  var startTime = context.currentTime + 0.100;
+  while (count < 10) {
+    playSound(bufferObj.snare, startTime + count * 0.08);
+    count++;
+  }
+}
+
+function AnimateButton() {
+  analyser.getByteFrequencyData(frequencyData);
+  requestAnimationFrame(AnimateButton);
+  console.log(frequencyData);
+
+} 
