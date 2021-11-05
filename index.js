@@ -107,28 +107,19 @@ const play = () => {
   if (context.state==='suspended')  context.resume();
 
   //create an oscillator
-  const osc = context.createOscillator();
 
-  //set the type & frequency of the oscillator
-  osc.type= 'triangle';
-  osc.frequency.value = 350; 
+  //set the type & frequency of the oscillator 350
 
-  //increase the freq exponentially over time
-  osc.frequency.exponentialRampToValueAtTime(600,context.currentTime + 1);
+  //increase the freq exponentially over time 600
 
   //drop the volume exponentially over time
-  const gainNode = context.createGain();
-  gainNode.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 1);
 
 
   //start
-  osc.start(0);
 
   //stop after 1 second 
-  osc.stop(context.currentTime + 1);
 
   //connect
-  osc.connect(gainNode).connect(context.destination);
 }
 
 //add keyboard listner
