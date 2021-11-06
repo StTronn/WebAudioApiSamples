@@ -88,13 +88,23 @@ BufferLoader.prototype.load = function () {
     this.loadBuffer(this.urlList[i], i);
 };
 
+// Play Sound
+function playSound(buffer, time = 0) {
+  var source = context.createBufferSource();
+  source.buffer = buffer;
 
-function playSound(buffer, key, time = 0) {
+  source.connect(context.destination);
+  source[source.start ? 'start' : 'noteOn'](time);
+
+}
+
+
+//Play Sound with Individual Gain
+function playSoundGain(buffer, key, time = 0) {
   var source = context.createBufferSource();
   source.buffer = buffer;
 
   const gainNode = context.createGain();
-  console.log(gainObj[key], key);
   gainNode.gain.value = gainObj[key];
 
   source.connect(gainNode);
@@ -108,31 +118,24 @@ loadSounds(bufferObj, soundmap, init)
 
 const gainObj = {}
 Object.keys(soundmap).forEach(key => gainObj[key] = 1)
-console.log(gainObj);
 
 // var startOffset = 0;
 //select an element with class drum-area
 
-const onClick = (e) => {
-  const drum = e.target;
-  const key = drum.getAttribute("data-key");
-  console.log({key})
-  const buffer = bufferObj[key];
-  playSound(buffer, key);
-}
 
 function init() {
   const drumArea = document.getElementById("drum-area");
-  const entries = Object.entries(bufferObj);
+
   let count = 1;
-  entries.forEach(([key, value]) => {
+
+  Object.entries(bufferObj).forEach(([key, value]) => {
     const padSection = document.createElement("span");
     padSection.classList.add(`padArea${count}`);
+
+    const pad = createDrumPad(key, count++);
+
+    // const slider = createSlider(key);
     // padSection.setAttribute("data-key", key);
-    const pad = createPads(key,count++); 
-    const slider = createSlider(key);
-    console.log(slider)
-    // drum.innerHTML = key;
     // padSection.appendChild(slider);
     padSection.appendChild(pad);
     drumArea.appendChild(padSection);
@@ -140,24 +143,18 @@ function init() {
   drumArea.addEventListener("click", onClick);
 }
 
-function createPads(key,count) {
+
+function createDrumPad(key, count) {
   const pad = document.createElement("div");
-  pad.classList.add(`pad${count}`);
-  pad.classList.add('bd');
+  //adding class for styling
+  pad.classList.add(`pad${count}`, 'bd');
+
+  //adding key(Instrument) to be accessed when clicked
   pad.setAttribute("data-key", key);
+
   return pad;
 }
 
-function onSliderChange(e) {
-  const slider = e.target;
-  const key = slider.getAttribute("data-key");
-  gainObj[key] = slider.value;
-  // const buffer = bufferObj[key];
-  // const gainNode = context.createGain();
-  // console.log(slider.value);
-  // gainNode.gain.value = slider.value;
-  // playSound(buffer, 0, gainNode);
-}
 
 function createSlider(key) {
   const slider = document.createElement("input");
@@ -173,43 +170,26 @@ function createSlider(key) {
   return slider;
 }
 
-//on Click handler gets the data-key of the clicked element
 
-const onKeyDown = (e) => {
-  const key = e.key;
-  console.log(key);
+function onSliderChange(e) {
+  const slider = e.target;
+  const key = slider.getAttribute("data-key");
+  gainObj[key] = slider.value;
 }
 
-document.addEventListener("keydown", onKeyDown);
+function onClick(e) {
+  const drum = e.target;
+  const key = drum.getAttribute("data-key");
+  const buffer = bufferObj[key];
+  // playSoundGain(buffer, key);
+  playSound(buffer);
+}
 
-
-
-// const play = () => {
-// 	console.log(bufferObj);
-// 	var startTime = context.currentTime + 0.100;
-// 	var tempo = 80; // BPM (beats per minute)
-// 	var eighthNoteTime = (60 / tempo) / 2;
-
-// 	for (var bar = 0; bar < 2; bar++) {
-// 		var time = startTime + bar * 8 * eighthNoteTime;
-// 		// Play the bass (kick) drum on beats 1, 5
-// 		playSound(bufferObj.kick, time);
-// 		playSound(bufferObj.kick, time + 4 * eighthNoteTime);
-// 		// Play the snare drum on beats 3, 7
-// 		playSound(bufferObj.snare, time + 2 * eighthNoteTime);
-// 		playSound(bufferObj.snare, time + 6 * eighthNoteTime);
-// 		// Play the hihat every eighth note.
-// 		for (var i = 0; i < 8; ++i) {
-// 			playSound(bufferObj.hihat, time + i * eighthNoteTime);
-// 		}
-// 	}
-// }
-
-// const drumRoll = ()=>{
-// 	let count = 0;
-// 	var startTime = context.currentTime + 0.100;
-// 	while(count<10){
-// 		playSound(bufferObj.snare, startTime+ count*0.08);
-// 		count++;
-// 	}
-// }
+//add a keyDown listener which plays the different sounds for keys 1 to 6
+document.addEventListener("keydown", function (e) {
+  const key = e.key;
+  if (key >=1 && key <= 6) {
+    const buffer = Object.values(bufferObj)[key-1];
+    playSound(buffer);
+  }
+});
