@@ -88,6 +88,15 @@ BufferLoader.prototype.load = function () {
     this.loadBuffer(this.urlList[i], i);
 };
 
+
+
+
+
+
+
+
+
+
 // Play Sound
 function playSound(buffer, time = 0) {
   var source = context.createBufferSource();
@@ -97,6 +106,20 @@ function playSound(buffer, time = 0) {
   source[source.start ? 'start' : 'noteOn'](time);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Play Sound with Individual Gain
@@ -111,6 +134,12 @@ function playSoundGain(buffer, key, time = 0) {
   gainNode.connect(context.destination);
   source[source.start ? 'start' : 'noteOn'](time);
 }
+
+
+
+
+
+
 
 
 let bufferObj = {}; // stores and loads all your sounds 
@@ -128,7 +157,7 @@ function init() {
 
   let count = 1;
 
-  Object.entries(bufferObj).forEach(([key, value]) => {
+  Object.entries(bufferObj).forEach(([key]) => {
     const padSection = document.createElement("span");
     padSection.classList.add(`padArea${count}`);
 
