@@ -104,21 +104,24 @@ let bufferObj = {}; // stores and loads all your sounds
 loadSounds(bufferObj, soundmap)
 console.log(bufferObj)
 
-var startOffset = 0;
+const startOffset = 0;
 
 const play = () => {
-  var startTime = context.currentTime + 0.100;
-  var tempo = 80; // BPM (beats per minute)
-  var eighthNoteTime = (60 / tempo) / 2;
+  const startTime = context.currentTime + 0.100;
+  const tempo = 80; // BPM (beats per minute)
+  const eighthNoteTime = (60 / tempo) / 2;
 
   for (var bar = 0; bar < 2; bar++) {
     var time = startTime + bar * 8 * eighthNoteTime;
+
     // Play the bass (kick) drum on beats 1, 5
     playSound(bufferObj.kick, time);
     playSound(bufferObj.kick, time + 4 * eighthNoteTime);
+
     // Play the snare drum on beats 3, 7
     playSound(bufferObj.snare, time + 2 * eighthNoteTime);
     playSound(bufferObj.snare, time + 6 * eighthNoteTime);
+
     // Play the hihat every eighth note.
     for (var i = 0; i < 8; ++i) {
       playSound(bufferObj.hihat, time + i * eighthNoteTime);
@@ -128,11 +131,11 @@ const play = () => {
 
 
 const playSick = () => {
-  AnimateButton();
+  // AnimateButton();
 
-  var startTime = context.currentTime + 0.100;
-  var tempo = 120; // BPM (beats per minute)
-  var eighthNoteTime = (60 / tempo) / 2;
+  const startTime = context.currentTime + 0.100;
+  const tempo = 120; // BPM (beats per minute)
+  const eighthNoteTime = (60 / tempo) / 2;
 
   for (var bar = 0; bar < 3; bar++) {
     var time = startTime + bar * 8 * eighthNoteTime;
