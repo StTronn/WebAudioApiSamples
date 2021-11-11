@@ -106,7 +106,7 @@ console.log(bufferObj)
 
 const startOffset = 0;
 
-const play = () => {
+const playHiHat = () => {
   const startTime = context.currentTime + 0.100;
   const tempo = 80; // BPM (beats per minute)
   const eighthNoteTime = (60 / tempo) / 2;
@@ -140,10 +140,11 @@ const playSick = () => {
   for (var bar = 0; bar < 3; bar++) {
     var time = startTime + bar * 8 * eighthNoteTime;
 
-    // Play the bass (kick) drum on beats 1, 5
+    // Play the bass (kick) drum on beats 1, 3, 5
     playSound(bufferObj.kick, time);
     playSound(bufferObj.kick, time + 3 * eighthNoteTime);
     playSound(bufferObj.kick, time + 5 * eighthNoteTime);
+
     // Play the snare drum on beats 3, 7
     playSound(bufferObj.snare, time + 2 * eighthNoteTime);
     playSound(bufferObj.snare, time + 6 * eighthNoteTime);
