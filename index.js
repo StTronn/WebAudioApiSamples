@@ -96,7 +96,7 @@ function playSound(buffer, time = 0) {
   var source = context.createBufferSource();
   source.buffer = buffer;
   source.connect(context.destination);
-  source[source.start ? 'start' : 'noteOn'](time);
+  source.start(time);
 }
 
 
