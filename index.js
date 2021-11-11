@@ -103,7 +103,7 @@ function playSound(buffer, time = 0) {
   source.buffer = buffer;
 
   source.connect(context.destination);
-  source[source.start ? 'start' : 'noteOn'](time);
+  source.start(time);
 
 }
 
@@ -132,7 +132,7 @@ function playSoundGain(buffer, key, time = 0) {
 
   source.connect(gainNode);
   gainNode.connect(context.destination);
-  source[source.start ? 'start' : 'noteOn'](time);
+  source.start(time);
 }
 
 
