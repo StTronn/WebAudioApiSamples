@@ -130,7 +130,7 @@ const playHiHat = () => {
 }
 
 
-const playSick = () => {
+const playBeat = () => {
   // AnimateButton();
 
   const startTime = context.currentTime + 0.100;
