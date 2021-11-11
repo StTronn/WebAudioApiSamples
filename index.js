@@ -89,6 +89,15 @@ BufferLoader.prototype.load = function () {
 };
 
 
+let bufferObj = {}; // buffer for each sound/key 
+// takes url and creates buffer
+loadSounds(bufferObj, soundmap, init)
+
+const gainObj = {}
+Object.keys(soundmap).forEach(key => gainObj[key] = 1)
+
+// var startOffset = 0;
+//select an element with class drum-area
 
 
 
@@ -99,12 +108,15 @@ BufferLoader.prototype.load = function () {
 
 // Play Sound
 function playSound(buffer, time = 0) {
+  //create BufferSource
   var source = context.createBufferSource();
+
+  //assign Buffer
   source.buffer = buffer;
 
+  //connect to destination
   source.connect(context.destination);
   source.start(time);
-
 }
 
 
@@ -142,14 +154,6 @@ function playSoundGain(buffer, key, time = 0) {
 
 
 
-let bufferObj = {}; // stores and loads all your sounds 
-loadSounds(bufferObj, soundmap, init)
-
-const gainObj = {}
-Object.keys(soundmap).forEach(key => gainObj[key] = 1)
-
-// var startOffset = 0;
-//select an element with class drum-area
 
 
 function init() {
@@ -170,6 +174,16 @@ function init() {
     drumArea.appendChild(padSection);
   });
   drumArea.addEventListener("click", onClick);
+}
+
+
+
+function onClick(e) {
+  const drum = e.target;
+  const key = drum.getAttribute("data-key");
+  const buffer = bufferObj[key];
+  // playSoundGain(buffer, key);
+  playSound(buffer);
 }
 
 
@@ -204,14 +218,6 @@ function onSliderChange(e) {
   const slider = e.target;
   const key = slider.getAttribute("data-key");
   gainObj[key] = slider.value;
-}
-
-function onClick(e) {
-  const drum = e.target;
-  const key = drum.getAttribute("data-key");
-  const buffer = bufferObj[key];
-  // playSoundGain(buffer, key);
-  playSound(buffer);
 }
 
 //add a keyDown listener which plays the different sounds for keys 1 to 6
