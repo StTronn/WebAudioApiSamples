@@ -104,7 +104,6 @@ console.log(bufferObj)
 var startOffset = 0;
 
 const play = () => {
-  if (context.state==='suspended')  context.resume();
 
   //create an oscillator
 
