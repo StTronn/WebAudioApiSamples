@@ -99,7 +99,6 @@ function playSound(buffer, time = 0) {
 
 let bufferObj = {}; // stores and loads all your sounds 
 loadSounds(bufferObj, soundmap)
-console.log(bufferObj)
 
 var startOffset = 0;
 
