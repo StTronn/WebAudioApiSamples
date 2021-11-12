@@ -11,24 +11,24 @@ const soundmap = {
   tom:
     "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/tom.wav",
   ride:
-    "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/ride.wav"
+    "https://raw.githubusercontent.com/wesbos/JavaScript30/master/01%20-%20JavaScript%20Drum%20Kit/sounds/ride.wav",
 };
 
 
 
 function loadSounds(obj, soundMap, callback) {
   // Array-ify
-  var names = [];
-  var paths = [];
-  for (var name in soundMap) {
-    var path = soundMap[name];
+  let names = [];
+  let paths = [];
+  for (let name in soundMap) {
+    let path = soundMap[name];
     names.push(name);
     paths.push(path);
   }
   bufferLoader = new BufferLoader(context, paths, function (bufferList) {
-    for (var i = 0; i < bufferList.length; i++) {
-      var buffer = bufferList[i];
-      var name = names[i];
+    for (let i = 0; i < bufferList.length; i++) {
+      let buffer = bufferList[i];
+      let name = names[i];
       obj[name] = buffer;
     }
     if (callback) {
@@ -51,11 +51,11 @@ function BufferLoader(context, urlList, callback) {
 
 BufferLoader.prototype.loadBuffer = function (url, index) {
   // Load buffer asynchronously
-  var request = new XMLHttpRequest();
+  let request = new XMLHttpRequest();
   request.open("GET", url, true);
   request.responseType = "arraybuffer";
 
-  var loader = this;
+  let loader = this;
 
   request.onload = function () {
     // Asynchronously decode the audio file data in request.response
@@ -84,7 +84,7 @@ BufferLoader.prototype.loadBuffer = function (url, index) {
 };
 
 BufferLoader.prototype.load = function () {
-  for (var i = 0; i < this.urlList.length; ++i)
+  for (let i = 0; i < this.urlList.length; ++i)
     this.loadBuffer(this.urlList[i], i);
 };
 
@@ -96,7 +96,7 @@ loadSounds(bufferObj, soundmap, init)
 const gainObj = {}
 Object.keys(soundmap).forEach(key => gainObj[key] = 1)
 
-// var startOffset = 0;
+// let startOffset = 0;
 //select an element with class drum-area
 
 
@@ -109,7 +109,7 @@ Object.keys(soundmap).forEach(key => gainObj[key] = 1)
 // Play Sound
 function playSound(buffer, time = 0) {
   //create BufferSource
-  var source = context.createBufferSource();
+  let source = context.createBufferSource();
 
   //assign Buffer
   source.buffer = buffer;
@@ -136,7 +136,7 @@ function playSound(buffer, time = 0) {
 
 //Play Sound with Individual Gain
 function playSoundGain(buffer, key, time = 0) {
-  var source = context.createBufferSource();
+  let source = context.createBufferSource();
   source.buffer = buffer;
 
   const gainNode = context.createGain();
@@ -175,7 +175,6 @@ function init() {
   });
   drumArea.addEventListener("click", onClick);
 }
-
 
 
 function onClick(e) {
@@ -223,8 +222,8 @@ function onSliderChange(e) {
 //add a keyDown listener which plays the different sounds for keys 1 to 6
 document.addEventListener("keydown", function (e) {
   const key = e.key;
-  if (key >=1 && key <= 6) {
-    const buffer = Object.values(bufferObj)[key-1];
+  if (key >= 1 && key <= 6) {
+    const buffer = Object.values(bufferObj)[key - 1];
     playSound(buffer);
   }
 });
